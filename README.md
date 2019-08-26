@@ -4,6 +4,12 @@ This function takes modified data from accelerometers and gyroscopes from a wear
 
 There is one run_analysis.R file that doesn't require any arguments, but retrieves the data from test and trial datasets, variable names from the features.txt file, subjects from the subject_train.txt file, and activity labels from the activity_labels.txt file.
 
+## Function's Process
+1) Merge the training and test datassets into one dataset.
+2) Extracts the mean and standard deviation measurements.
+3) Add descriptive column names
+4) Export dataset with final data
+
 ## Variables
 There are (66) variables for the final output: (33) for the means and (33) for the standard deviations.
 

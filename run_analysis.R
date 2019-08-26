@@ -74,7 +74,7 @@ run_analysis <- function() {
         ##Create data set of means with data sorted by subject and activity 
         grouped_data <- limited_X_combined %>% group_by(subject, activity) %>% summarise_each(mean)
 
-        ## return to original worked directory 
+        ## return to original working directory 
         setwd(startingDirectory)
 }
 

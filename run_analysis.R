@@ -1,13 +1,11 @@
 ##Function to interpret wearable computing data by test subject and activity
 run_analysis <- function() {
-        startingDirector <- getwd()
-        if (!file.exists("features.txt")) {
-                setwd(".//dataset//GACD//UCI HAR Dataset") 
-        }
-
         library(dplyr)
+
+        ## get initial working directory
+        startingDirectory <- getwd()
         
-        ##Load and combine tables from test and train data sets 
+        ##Load and combine tables from test and train data sets, name tables as loaded
         functionNames <- read.table("./features.txt")
         functionNames <- t(functionNames[,2])
         subject_train <- read.table("./train/subject_train.txt")
@@ -27,14 +25,17 @@ run_analysis <- function() {
         X_train_expanded <- cbind(Y_train, X_train)
         X_test_expanded <- cbind(Y_test, X_test)
         
+        ## Replace activity number with english equivalent
         columnActivities <- activities$V2[match(X_train_expanded$activity,activities$V1)]
         X_train_expanded <- cbind(columnActivities, X_train_expanded)
         columnActivities <- activities$V2[match(X_test_expanded$activity,activities$V1)]
         X_test_expanded <- cbind(columnActivities, X_test_expanded)
         
+        ## Add subject columns to data
         X_train_expanded <- cbind(subject_train, X_train_expanded)
         X_test_expanded <- cbind(subject_test, X_test_expanded)
         
+        ## Combine test and train datasets together
         X_combined <- rbind(X_train_expanded, X_test_expanded)
         
         ##Separate out mean and standard deviation columns and provide human readable labels
@@ -64,11 +65,16 @@ run_analysis <- function() {
                                    "fbody gyro jerk mag (rad/s^3)","fbody gyro jerk mag Std Dev"
                                    )
         
+        ## Add subject and activity columns to the mean and standard deviation column
         limited_X_combined <- cbind(X_combined$subject, X_combined$columnActivities, X_combined[,meanStdCounts])
+
+        ## Add engish descriptions to data
         colnames(limited_X_combined) <- combined_column_names
 
         ##Create data set of means with data sorted by subject and activity 
         grouped_data <- limited_X_combined %>% group_by(subject, activity) %>% summarise_each(mean)
-        setwd("../../")
+
+        ## return to originatl 
+        setwd(startingDirectory)
 }
 

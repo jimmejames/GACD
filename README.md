@@ -36,3 +36,7 @@ fBodyGyroJerkMag
 
 ## Prerequisits
 The function was tested on a Windows 10 Pro OS with R version 3.6.1 (64bit).  The function takes training and test dataset data and performs the required operations.
+
+## Export file
+The tidy datatable was exported to a CSV using the following command:
+write.csv(grouped_data, file = "tidyData.csv")

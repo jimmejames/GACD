@@ -1,4 +1,4 @@
-# GACD
+# Wearable Device Data Analysis (Getting and Cleaning Data Course Project)
 ## Scope of Function
 This function takes modified data from accelerometers and gyroscopes from a wearable device.  The data was transformed from its raw for prior to being fed into this function.  The output should be a table with the means and standard deviations of the various functions sorted by the subject and the activity the subject performed to generate the data.
 
